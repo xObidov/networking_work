@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Bog'lanish — Silk & Stone{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <span class="section-tag">✦ Aloqa</span>
+  <h1 class="section-title">Bog'laning</h1>
+  <p class="section-desc" style="margin: 0 auto; text-align:center">
+    Ulgurji buyurtma yoki hamkorlik uchun biz bilan bog'laning
+  </p>
+</div>
+
+<section class="contact-section" style="padding-top:5rem; padding-bottom:5rem">
+
+  <div class="contact-info">
+    <span class="section-tag">✦ Aloqa ma'lumotlari</span>
+    <h2 class="section-title">Biz bilan<br>Ishlang</h2>
+    <p class="section-desc">
+      Ulgurji buyurtma, hamkorlik yoki mahsulot haqida ma'lumot olish uchun
+      bizga xabar yuboring. 24 soat ichida javob beramiz.
+    </p>
+
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div class="contact-item-text">
+          <label>Manzil</label>
+          <p>Toshkent sh., Yunusobod tumani, Amir Temur ko'chasi 15</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div class="contact-item-text">
+          <label>Telefon</label>
+          <p>+998 71 123 45 67</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">✉️</div>
+        <div class="contact-item-text">
+          <label>Email</label>
+          <p>info@silkstone.uz</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🕐</div>
+        <div class="contact-item-text">
+          <label>Ish vaqti</label>
+          <p>Dushanba–Shanba: 09:00–18:00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="contact-form" id="contactForm">
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--white); margin-bottom:1.5rem">
+        Xabar Yuborish
+      </h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ismingiz</label>
+          <input type="text" id="name" placeholder="Ism Familiya" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="email@example.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Telefon</label>
+        <input type="tel" id="phone" placeholder="+998 90 123 45 67">
+      </div>
+
+      <div class="form-group">
+        <label>Maqsad</label>
+        <select id="subject">
+          <option value="">Tanlang...</option>
+          <option value="wholesale">Ulgurji buyurtma</option>
+          <option value="partnership">Hamkorlik</option>
+          <option value="info">Ma'lumot olish</option>
+          <option value="other">Boshqa</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Xabar</label>
+        <textarea id="message" placeholder="Xabaringizni yozing..."></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="submitForm()">
+        Xabar Yuborish →
+      </button>
+    </div>
+
+    <div class="form-success" id="successMsg">
+      <span class="check">✓</span>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:var(--white); margin-bottom:1rem">
+        Xabar Yuborildi!
+      </h3>
+      <p id="successText" style="color:rgba(255,255,255,0.6)"></p>
+      <button onclick="resetForm()" class="btn-submit" style="margin-top:1.5rem; width:auto; padding:0.8rem 2rem">
+        Qaytish
+      </button>
+    </div>
+  </div>
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function submitForm() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (!name || !email || !message) {
+    alert('Iltimos, majburiy maydonlarni to\'ldiring!');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('email', email);
+  formData.append('message', message);
+
+  fetch('/contact', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('successText').textContent = data.message;
+      document.getElementById('successMsg').style.display = 'block';
+    }
+  })
+  .catch(() => {
+    alert('Xatolik yuz berdi. Iltimos qayta urinib ko\'ring.');
+  });
+}
+
+function resetForm() {
+  document.getElementById('contactForm').style.display = 'block';
+  document.getElementById('successMsg').style.display = 'none';
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('phone').value = '';
+  document.getElementById('message').value = '';
+}
+</script>
+{% endblock %}

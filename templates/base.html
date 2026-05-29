@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Silk & Stone — Ulgurji Kiyim-kechak{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Silk <span>&</span> Stone</a>
+  <ul class="nav-links">
+    <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Bosh sahifa</a></li>
+    <li><a href="/products" class="{% if request.path == '/products' %}active{% endif %}">Mahsulotlar</a></li>
+    <li><a href="/about" class="{% if request.path == '/about' %}active{% endif %}">Biz haqimizda</a></li>
+    <li><a href="/contact" class="{% if request.path == '/contact' %}active{% endif %}">Bog'lanish</a></li>
+  </ul>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="footer-logo">Silk <span>&</span> Stone</div>
+  <p>© 2025 Silk & Stone Ulgurji. Barcha huquqlar himoyalangan.</p>
+  <p>Toshkent, O'zbekiston</p>
+</footer>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>
