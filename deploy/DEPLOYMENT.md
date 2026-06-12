@@ -26,8 +26,7 @@ SQL
 
 ```bash
 sudo useradd -r -m -d /srv/crm_system -s /usr/bin/nologin crm
-sudo -u crm git clone https://github.com/xObidov/networking_work.git /tmp/repo
-sudo -u crm cp -r /tmp/repo/crm_system/. /srv/crm_system/
+sudo -u crm git clone https://github.com/xObidov/networking_work.git /srv/crm_system
 cd /srv/crm_system
 sudo -u crm python -m venv .venv
 sudo -u crm .venv/bin/pip install -r requirements.txt

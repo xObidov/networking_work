@@ -1,7 +1,25 @@
-venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Django
+*.log
+db.sqlite3
+media/
+staticfiles/
+logs/
+
+# Secrets
 .env
-app.log
+
+# Editors / OS
 .vscode/
 .idea/
+.DS_Store
+
+# Coverage
+.coverage
+htmlcov/
