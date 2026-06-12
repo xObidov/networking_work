@@ -1,0 +1,785 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-12 22:17+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+#: activity_logs/models.py:12
+msgid "Login"
+msgstr "Kirish"
+
+#: activity_logs/models.py:13 templates/base.html:103
+msgid "Logout"
+msgstr "Chiqish"
+
+#: activity_logs/models.py:14
+msgid "Create"
+msgstr "Yaratish"
+
+#: activity_logs/models.py:15
+msgid "Update"
+msgstr "Yangilash"
+
+#: activity_logs/models.py:16 templates/customers/detail.html:12
+#: templates/includes/confirm_delete.html:10
+#: templates/includes/confirm_delete.html:14
+msgid "Delete"
+msgstr "O‘chirish"
+
+#: activity_logs/models.py:17
+msgid "Assign"
+msgstr "Biriktirish"
+
+#: activity_logs/models.py:18
+msgid "Convert"
+msgstr "Aylantirish"
+
+#: activity_logs/models.py:19
+msgid "Status Change"
+msgstr "Holat o‘zgarishi"
+
+#: core/roles.py:13
+msgid "Super Admin"
+msgstr "Super Admin"
+
+#: core/roles.py:14
+msgid "Admin"
+msgstr "Admin"
+
+#: core/roles.py:15
+msgid "Manager"
+msgstr "Menejer"
+
+#: core/roles.py:16
+msgid "Sales Agent"
+msgstr "Savdo agenti"
+
+#: core/roles.py:17
+msgid "Support Agent"
+msgstr "Qo‘llab-quvvatlash agenti"
+
+#: customers/models.py:24
+msgid "Active"
+msgstr "Faol"
+
+#: customers/models.py:25
+msgid "Inactive"
+msgstr "Nofaol"
+
+#: customers/models.py:26 deals/models.py:11
+msgid "Prospect"
+msgstr "Potensial"
+
+#: deals/models.py:12 leads/models.py:13
+msgid "Qualified"
+msgstr "Saralangan"
+
+#: deals/models.py:13
+msgid "Proposal"
+msgstr "Taklif"
+
+#: deals/models.py:14
+msgid "Negotiation"
+msgstr "Muzokara"
+
+#: deals/models.py:15 leads/models.py:15 templates/deals/kanban.html:7
+msgid "Won"
+msgstr "Yutildi"
+
+#: deals/models.py:16 leads/models.py:16
+msgid "Lost"
+msgstr "Yo‘qotildi"
+
+#: invoices/models.py:14
+msgid "Draft"
+msgstr "Qoralama"
+
+#: invoices/models.py:15 tasks/models.py:19
+msgid "Pending"
+msgstr "Kutilmoqda"
+
+#: invoices/models.py:16
+msgid "Paid"
+msgstr "To‘langan"
+
+#: invoices/models.py:17
+msgid "Overdue"
+msgstr "Muddati o‘tgan"
+
+#: leads/models.py:11
+msgid "New"
+msgstr "Yangi"
+
+#: leads/models.py:12
+msgid "Contacted"
+msgstr "Bog‘lanildi"
+
+#: leads/models.py:14
+msgid "Proposal Sent"
+msgstr "Taklif yuborildi"
+
+#: leads/models.py:19
+msgid "Website"
+msgstr "Veb-sayt"
+
+#: leads/models.py:20
+msgid "Referral"
+msgstr "Tavsiya"
+
+#: leads/models.py:21
+msgid "Social Media"
+msgstr "Ijtimoiy tarmoq"
+
+#: leads/models.py:22
+msgid "Cold Call"
+msgstr "Sovuq qo‘ng‘iroq"
+
+#: leads/models.py:23
+msgid "Email Campaign"
+msgstr "Email kampaniya"
+
+#: leads/models.py:24
+msgid "Event"
+msgstr "Tadbir"
+
+#: leads/models.py:25
+msgid "Other"
+msgstr "Boshqa"
+
+#: tasks/models.py:13 tickets/models.py:18
+msgid "Low"
+msgstr "Past"
+
+#: tasks/models.py:14 tickets/models.py:19
+msgid "Medium"
+msgstr "O‘rta"
+
+#: tasks/models.py:15 tickets/models.py:20
+msgid "High"
+msgstr "Yuqori"
+
+#: tasks/models.py:16
+msgid "Critical"
+msgstr "Juda muhim"
+
+#: tasks/models.py:20 tickets/models.py:13
+msgid "In Progress"
+msgstr "Jarayonda"
+
+#: tasks/models.py:21
+msgid "Completed"
+msgstr "Bajarildi"
+
+#: tasks/models.py:22
+msgid "Cancelled"
+msgstr "Bekor qilindi"
+
+#: templates/accounts/change_password.html:8 templates/accounts/profile.html:32
+#: templates/base.html:99
+msgid "Change Password"
+msgstr "Parolni o‘zgartirish"
+
+#: templates/accounts/change_password.html:18
+msgid "Update Password"
+msgstr "Parolni yangilash"
+
+#: templates/accounts/login.html:9
+msgid "Sign in to CRM"
+msgstr "CRM tizimiga kirish"
+
+#: templates/accounts/login.html:14 templates/customers/list.html:30
+msgid "Email"
+msgstr "Email"
+
+#: templates/accounts/login.html:18
+msgid "Password"
+msgstr "Parol"
+
+#: templates/accounts/login.html:24
+msgid "Remember me"
+msgstr "Meni eslab qol"
+
+#: templates/accounts/login.html:26
+msgid "Forgot password?"
+msgstr "Parolni unutdingizmi?"
+
+#: templates/accounts/login.html:28
+#: templates/accounts/password_reset_complete.html:8
+#: templates/accounts/register.html:12
+msgid "Sign In"
+msgstr "Kirish"
+
+#: templates/accounts/login.html:30
+msgid "No account?"
+msgstr "Hisobingiz yo‘qmi?"
+
+#: templates/accounts/login.html:30 templates/accounts/register.html:10
+msgid "Register"
+msgstr "Ro‘yxatdan o‘tish"
+
+#: templates/accounts/password_reset.html:7
+msgid "Reset your password"
+msgstr "Parolni tiklash"
+
+#: templates/accounts/password_reset.html:8
+msgid "Enter your email and we will send a reset link."
+msgstr "Emailingizni kiriting — tiklash havolasini yuboramiz."
+
+#: templates/accounts/password_reset.html:13
+msgid "Send Reset Link"
+msgstr "Tiklash havolasini yuborish"
+
+#: templates/accounts/password_reset.html:15
+#: templates/accounts/password_reset_done.html:9
+msgid "Back to sign in"
+msgstr "Kirish sahifasiga qaytish"
+
+#: templates/accounts/password_reset_complete.html:7
+msgid "Password reset complete"
+msgstr "Parol muvaffaqiyatli tiklandi"
+
+#: templates/accounts/password_reset_confirm.html:6
+msgid "Set a new password"
+msgstr "Yangi parol o‘rnating"
+
+#: templates/accounts/password_reset_confirm.html:16
+msgid "Save New Password"
+msgstr "Yangi parolni saqlash"
+
+#: templates/accounts/password_reset_done.html:7
+msgid "Check your inbox"
+msgstr "Pochtangizni tekshiring"
+
+#: templates/accounts/profile.html:5
+msgid "My Profile"
+msgstr "Mening profilim"
+
+#: templates/accounts/profile.html:19
+msgid "Email verified"
+msgstr "Email tasdiqlangan"
+
+#: templates/accounts/profile.html:21
+msgid "Email not verified"
+msgstr "Email tasdiqlanmagan"
+
+#: templates/accounts/profile.html:31
+msgid "Save Changes"
+msgstr "O‘zgarishlarni saqlash"
+
+#: templates/accounts/register.html:7
+msgid "Create your account"
+msgstr "Hisob yaratish"
+
+#: templates/accounts/register.html:12
+msgid "Already registered?"
+msgstr "Allaqachon ro‘yxatdan o‘tganmisiz?"
+
+#: templates/activity_logs/list.html:6 templates/base.html:32
+msgid "Activity Log"
+msgstr "Faoliyat jurnali"
+
+#: templates/activity_logs/list.html:9 templates/customers/list.html:11
+#: templates/deals/list.html:15 templates/invoices/list.html:12
+#: templates/leads/list.html:11 templates/tasks/list.html:11
+#: templates/tickets/list.html:11
+msgid "Search..."
+msgstr "Qidirish..."
+
+#: templates/activity_logs/list.html:12
+msgid "All actions"
+msgstr "Barcha amallar"
+
+#: templates/activity_logs/list.html:16 templates/customers/list.html:24
+#: templates/deals/list.html:22 templates/invoices/list.html:19
+#: templates/leads/list.html:24 templates/tasks/list.html:30
+#: templates/tickets/list.html:24
+msgid "Filter"
+msgstr "Filtr"
+
+#: templates/activity_logs/list.html:22
+msgid "User"
+msgstr "Foydalanuvchi"
+
+#: templates/activity_logs/list.html:22
+msgid "Action"
+msgstr "Amal"
+
+#: templates/activity_logs/list.html:22 templates/invoices/detail.html:31
+#: templates/invoices/pdf.html:37
+msgid "Description"
+msgstr "Tavsif"
+
+#: templates/activity_logs/list.html:22
+msgid "IP Address"
+msgstr "IP manzil"
+
+#: templates/activity_logs/list.html:22
+msgid "When"
+msgstr "Qachon"
+
+#: templates/activity_logs/list.html:32
+msgid "No activity recorded."
+msgstr "Faoliyat qayd etilmagan."
+
+#: templates/base.html:23
+msgid "Dashboard"
+msgstr "Boshqaruv paneli"
+
+#: templates/base.html:24 templates/customers/list.html:6
+#: templates/dashboard/home.html:16
+msgid "Customers"
+msgstr "Mijozlar"
+
+#: templates/base.html:25 templates/dashboard/home.html:22
+#: templates/leads/list.html:6
+msgid "Leads"
+msgstr "Lidlar"
+
+#: templates/base.html:26 templates/customers/detail.html:57
+#: templates/dashboard/home.html:28 templates/deals/kanban.html:7
+#: templates/deals/list.html:7
+msgid "Deals"
+msgstr "Bitimlar"
+
+#: templates/base.html:27 templates/tasks/list.html:6
+msgid "Tasks"
+msgstr "Vazifalar"
+
+#: templates/base.html:28 templates/customers/detail.html:72
+msgid "Tickets"
+msgstr "Murojaatlar"
+
+#: templates/base.html:29 templates/customers/detail.html:81
+#: templates/invoices/list.html:7
+msgid "Invoices"
+msgstr "Hisob-fakturalar"
+
+#: templates/base.html:30 templates/reports/index.html:5
+msgid "Reports"
+msgstr "Hisobotlar"
+
+#: templates/base.html:75 templates/notifications/list.html:7
+msgid "Notifications"
+msgstr "Bildirishnomalar"
+
+#: templates/base.html:77 templates/notifications/list.html:9
+msgid "Mark all read"
+msgstr "Hammasini o‘qilgan deb belgilash"
+
+#: templates/base.html:86
+msgid "No unread notifications"
+msgstr "O‘qilmagan bildirishnomalar yo‘q"
+
+#: templates/base.html:88 templates/dashboard/home.html:84
+#: templates/dashboard/home.html:100
+msgid "View all"
+msgstr "Hammasini ko‘rish"
+
+#: templates/base.html:98
+msgid "Profile"
+msgstr "Profil"
+
+#: templates/customers/detail.html:11 templates/deals/detail.html:11
+#: templates/leads/detail.html:18 templates/tasks/detail.html:11
+#: templates/tickets/detail.html:11
+msgid "Edit"
+msgstr "Tahrirlash"
+
+#: templates/customers/detail.html:19
+msgid "Contact Info"
+msgstr "Aloqa ma’lumotlari"
+
+#: templates/customers/detail.html:29
+msgid "Notes"
+msgstr "Izohlar"
+
+#: templates/customers/detail.html:33
+msgid "Documents"
+msgstr "Hujjatlar"
+
+#: templates/customers/detail.html:49 templates/tasks/detail.html:38
+msgid "Upload"
+msgstr "Yuklash"
+
+#: templates/customers/detail.html:60 templates/deals/list.html:28
+msgid "Deal"
+msgstr "Bitim"
+
+#: templates/customers/detail.html:60 templates/deals/list.html:28
+msgid "Value"
+msgstr "Qiymat"
+
+#: templates/customers/detail.html:60 templates/deals/list.html:28
+msgid "Stage"
+msgstr "Bosqich"
+
+#: templates/customers/detail.html:60 templates/deals/list.html:28
+msgid "Expected Close"
+msgstr "Kutilayotgan yopilish"
+
+#: templates/customers/detail.html:90
+msgid "Activity Timeline"
+msgstr "Faoliyat tarixi"
+
+#: templates/customers/form.html:5
+msgid "Edit Customer"
+msgstr "Mijozni tahrirlash"
+
+#: templates/customers/form.html:5 templates/customers/list.html:7
+msgid "Add Customer"
+msgstr "Mijoz qo‘shish"
+
+#: templates/customers/form.html:17
+msgid "Save Customer"
+msgstr "Mijozni saqlash"
+
+#: templates/customers/form.html:18 templates/deals/form.html:18
+#: templates/includes/confirm_delete.html:13 templates/invoices/form.html:19
+#: templates/leads/form.html:18 templates/tasks/form.html:18
+#: templates/tickets/form.html:18
+msgid "Cancel"
+msgstr "Bekor qilish"
+
+#: templates/customers/list.html:14 templates/invoices/list.html:15
+#: templates/leads/list.html:14 templates/tasks/list.html:14
+#: templates/tickets/list.html:14
+msgid "All statuses"
+msgstr "Barcha holatlar"
+
+#: templates/customers/list.html:20
+msgid "All tags"
+msgstr "Barcha teglar"
+
+#: templates/customers/list.html:30 templates/leads/list.html:30
+msgid "Name"
+msgstr "Ism"
+
+#: templates/customers/list.html:30 templates/leads/list.html:30
+msgid "Company"
+msgstr "Kompaniya"
+
+#: templates/customers/list.html:30 templates/invoices/list.html:25
+#: templates/leads/list.html:30 templates/tasks/list.html:36
+#: templates/tickets/list.html:30
+msgid "Status"
+msgstr "Holat"
+
+#: templates/customers/list.html:30
+msgid "Tags"
+msgstr "Teglar"
+
+#: templates/customers/list.html:30 templates/deals/list.html:28
+msgid "Owner"
+msgstr "Egasi"
+
+#: templates/customers/list.html:46
+msgid "No customers found."
+msgstr "Mijozlar topilmadi."
+
+#: templates/dashboard/home.html:8
+msgid "Welcome back,"
+msgstr "Xush kelibsiz,"
+
+#: templates/dashboard/home.html:34
+msgid "Revenue"
+msgstr "Daromad"
+
+#: templates/dashboard/home.html:40
+msgid "Active Tasks"
+msgstr "Faol vazifalar"
+
+#: templates/dashboard/home.html:46
+msgid "New Leads (month)"
+msgstr "Yangi lidlar (oy)"
+
+#: templates/dashboard/home.html:55
+msgid "Monthly Revenue"
+msgstr "Oylik daromad"
+
+#: templates/dashboard/home.html:61
+msgid "Lead Conversion"
+msgstr "Lid konversiyasi"
+
+#: templates/dashboard/home.html:67
+msgid "Customer Growth"
+msgstr "Mijozlar o‘sishi"
+
+#: templates/dashboard/home.html:73
+msgid "Employee Performance (Won Revenue)"
+msgstr "Xodimlar samaradorligi (yutilgan daromad)"
+
+#: templates/dashboard/home.html:83
+msgid "Recent Activities"
+msgstr "So‘nggi faoliyatlar"
+
+#: templates/dashboard/home.html:93
+msgid "No activity yet."
+msgstr "Hozircha faoliyat yo‘q."
+
+#: templates/dashboard/home.html:100
+msgid "My Open Tasks"
+msgstr "Mening ochiq vazifalarim"
+
+#: templates/dashboard/home.html:110
+msgid "No open tasks."
+msgstr "Ochiq vazifalar yo‘q."
+
+#: templates/deals/detail.html:27
+msgid "Invoices for this deal"
+msgstr "Ushbu bitim hisob-fakturalari"
+
+#: templates/deals/form.html:5
+msgid "Edit Deal"
+msgstr "Bitimni tahrirlash"
+
+#: templates/deals/form.html:5 templates/deals/kanban.html:10
+#: templates/deals/list.html:10
+msgid "New Deal"
+msgstr "Yangi bitim"
+
+#: templates/deals/form.html:17
+msgid "Save Deal"
+msgstr "Bitimni saqlash"
+
+#: templates/deals/kanban.html:9
+msgid "List view"
+msgstr "Ro‘yxat ko‘rinishi"
+
+#: templates/deals/list.html:9
+msgid "Board view"
+msgstr "Doska ko‘rinishi"
+
+#: templates/deals/list.html:18
+msgid "All stages"
+msgstr "Barcha bosqichlar"
+
+#: templates/deals/list.html:28 templates/invoices/list.html:25
+#: templates/tickets/list.html:30
+msgid "Customer"
+msgstr "Mijoz"
+
+#: templates/deals/list.html:43
+msgid "No deals found."
+msgstr "Bitimlar topilmadi."
+
+#: templates/includes/confirm_delete.html:11
+msgid "This action cannot be undone."
+msgstr "Bu amalni qaytarib bo‘lmaydi."
+
+#: templates/invoices/detail.html:11
+msgid "Download PDF"
+msgstr "PDF yuklab olish"
+
+#: templates/invoices/detail.html:12
+msgid "Print"
+msgstr "Chop etish"
+
+#: templates/invoices/detail.html:26
+msgid "Billed to"
+msgstr "Kimga"
+
+#: templates/invoices/form.html:5
+msgid "Edit Invoice"
+msgstr "Hisob-fakturani tahrirlash"
+
+#: templates/invoices/form.html:5 templates/invoices/list.html:8
+msgid "Generate Invoice"
+msgstr "Hisob-faktura yaratish"
+
+#: templates/invoices/form.html:18
+msgid "Save Invoice"
+msgstr "Hisob-fakturani saqlash"
+
+#: templates/invoices/list.html:25
+msgid "Invoice #"
+msgstr "Hisob-faktura №"
+
+#: templates/invoices/list.html:25
+msgid "Amount"
+msgstr "Summa"
+
+#: templates/invoices/list.html:25
+msgid "Tax"
+msgstr "Soliq"
+
+#: templates/invoices/list.html:25
+msgid "Total"
+msgstr "Jami"
+
+#: templates/invoices/list.html:25 templates/tasks/list.html:36
+msgid "Due"
+msgstr "Muddat"
+
+#: templates/invoices/list.html:42
+msgid "No invoices found."
+msgstr "Hisob-fakturalar topilmadi."
+
+#: templates/leads/detail.html:12
+msgid "View Customer"
+msgstr "Mijozni ko‘rish"
+
+#: templates/leads/detail.html:15
+msgid "Convert to Customer"
+msgstr "Mijozga aylantirish"
+
+#: templates/leads/detail.html:26
+msgid "Lead Info"
+msgstr "Lid ma’lumotlari"
+
+#: templates/leads/detail.html:39
+msgid "Notes & History"
+msgstr "Izohlar va tarix"
+
+#: templates/leads/detail.html:43
+msgid "Add Note"
+msgstr "Izoh qo‘shish"
+
+#: templates/leads/form.html:5
+msgid "Edit Lead"
+msgstr "Lidni tahrirlash"
+
+#: templates/leads/form.html:5 templates/leads/list.html:7
+msgid "Create Lead"
+msgstr "Lid yaratish"
+
+#: templates/leads/form.html:17
+msgid "Save Lead"
+msgstr "Lidni saqlash"
+
+#: templates/leads/list.html:20 templates/tasks/list.html:26
+msgid "Any employee"
+msgstr "Istalgan xodim"
+
+#: templates/leads/list.html:30
+msgid "Source"
+msgstr "Manba"
+
+#: templates/leads/list.html:30 templates/tasks/list.html:36
+#: templates/tickets/list.html:30
+msgid "Assigned"
+msgstr "Biriktirilgan"
+
+#: templates/leads/list.html:30
+msgid "Created"
+msgstr "Yaratilgan"
+
+#: templates/leads/list.html:46
+msgid "No leads found."
+msgstr "Lidlar topilmadi."
+
+#: templates/notifications/list.html:22 templates/reports/index.html:13
+msgid "View"
+msgstr "Ko‘rish"
+
+#: templates/notifications/list.html:25
+msgid "Mark read"
+msgstr "O‘qilgan deb belgilash"
+
+#: templates/notifications/list.html:31
+msgid "No notifications."
+msgstr "Bildirishnomalar yo‘q."
+
+#: templates/tasks/detail.html:25
+msgid "Attachments"
+msgstr "Biriktirmalar"
+
+#: templates/tasks/detail.html:45
+msgid "Comments"
+msgstr "Sharhlar"
+
+#: templates/tasks/detail.html:49
+msgid "Comment"
+msgstr "Sharh qoldirish"
+
+#: templates/tasks/form.html:5
+msgid "Edit Task"
+msgstr "Vazifani tahrirlash"
+
+#: templates/tasks/form.html:5 templates/tasks/list.html:7
+msgid "New Task"
+msgstr "Yangi vazifa"
+
+#: templates/tasks/form.html:17
+msgid "Save Task"
+msgstr "Vazifani saqlash"
+
+#: templates/tasks/list.html:20 templates/tickets/list.html:20
+msgid "Any priority"
+msgstr "Istalgan muhimlik"
+
+#: templates/tasks/list.html:36
+msgid "Title"
+msgstr "Sarlavha"
+
+#: templates/tasks/list.html:36 templates/tickets/list.html:30
+msgid "Priority"
+msgstr "Muhimlik"
+
+#: templates/tasks/list.html:50
+msgid "No tasks found."
+msgstr "Vazifalar topilmadi."
+
+#: templates/tickets/detail.html:29
+msgid "Replies"
+msgstr "Javoblar"
+
+#: templates/tickets/detail.html:41
+msgid "Send Reply"
+msgstr "Javob yuborish"
+
+#: templates/tickets/form.html:5
+msgid "Edit Ticket"
+msgstr "Murojaatni tahrirlash"
+
+#: templates/tickets/form.html:5 templates/tickets/list.html:7
+msgid "New Ticket"
+msgstr "Yangi murojaat"
+
+#: templates/tickets/form.html:17
+msgid "Save Ticket"
+msgstr "Murojaatni saqlash"
+
+#: templates/tickets/list.html:6
+msgid "Support Tickets"
+msgstr "Qo‘llab-quvvatlash murojaatlari"
+
+#: templates/tickets/list.html:30
+msgid "Ticket #"
+msgstr "Murojaat №"
+
+#: templates/tickets/list.html:30
+msgid "Subject"
+msgstr "Mavzu"
+
+#: templates/tickets/list.html:45
+msgid "No tickets found."
+msgstr "Murojaatlar topilmadi."
+
+#: tickets/models.py:12
+msgid "Open"
+msgstr "Ochiq"
+
+#: tickets/models.py:14
+msgid "Resolved"
+msgstr "Hal qilindi"
+
+#: tickets/models.py:15
+msgid "Closed"
+msgstr "Yopildi"
+
+#: tickets/models.py:21
+msgid "Urgent"
+msgstr "Shoshilinch"

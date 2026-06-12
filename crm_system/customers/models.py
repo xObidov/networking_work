@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
 from core.models import TimeStampedModel
@@ -20,9 +21,9 @@ class Tag(TimeStampedModel):
 
 class Customer(TimeStampedModel):
     class Status(models.TextChoices):
-        ACTIVE = "active", "Active"
-        INACTIVE = "inactive", "Inactive"
-        PROSPECT = "prospect", "Prospect"
+        ACTIVE = "active", _("Active")
+        INACTIVE = "inactive", _("Inactive")
+        PROSPECT = "prospect", _("Prospect")
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)

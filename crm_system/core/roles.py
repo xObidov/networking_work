@@ -6,14 +6,15 @@ declares which roles may use it; the helpers below do the checking so the
 policy lives in exactly one place.
 """
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Role(models.TextChoices):
-    SUPER_ADMIN = "super_admin", "Super Admin"
-    ADMIN = "admin", "Admin"
-    MANAGER = "manager", "Manager"
-    SALES_AGENT = "sales_agent", "Sales Agent"
-    SUPPORT_AGENT = "support_agent", "Support Agent"
+    SUPER_ADMIN = "super_admin", _("Super Admin")
+    ADMIN = "admin", _("Admin")
+    MANAGER = "manager", _("Manager")
+    SALES_AGENT = "sales_agent", _("Sales Agent")
+    SUPPORT_AGENT = "support_agent", _("Support Agent")
 
 
 # Convenience groups used by views.

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load humanize %}
 {% block title %}{{ customer.full_name }} — CRM{% endblock %}
 {% block content %}
@@ -7,15 +8,15 @@
     <span class="badge {% if customer.status == 'active' %}bg-success{% elif customer.status == 'inactive' %}bg-secondary{% else %}bg-info{% endif %} fs-6 align-middle">{{ customer.get_status_display }}</span>
   </h3>
   <div>
-    <a href="{% url 'customers:edit' customer.pk %}" class="btn btn-outline-primary"><i class="bi bi-pencil me-1"></i>Edit</a>
-    <a href="{% url 'customers:delete' customer.pk %}" class="btn btn-outline-danger"><i class="bi bi-trash me-1"></i>Delete</a>
+    <a href="{% url 'customers:edit' customer.pk %}" class="btn btn-outline-primary"><i class="bi bi-pencil me-1"></i>{% trans "Edit" %}</a>
+    <a href="{% url 'customers:delete' customer.pk %}" class="btn btn-outline-danger"><i class="bi bi-trash me-1"></i>{% trans "Delete" %}</a>
   </div>
 </div>
 
 <div class="row g-3">
   <div class="col-lg-4">
     <div class="card shadow-sm mb-3">
-      <div class="card-header">Contact Info</div>
+      <div class="card-header">{% trans "Contact Info" %}</div>
       <div class="card-body small">
         <p><i class="bi bi-envelope me-2"></i>{{ customer.email }}</p>
         <p><i class="bi bi-telephone me-2"></i>{{ customer.phone|default:"—" }}</p>
@@ -25,11 +26,11 @@
       </div>
     </div>
     <div class="card shadow-sm mb-3">
-      <div class="card-header">Notes</div>
+      <div class="card-header">{% trans "Notes" %}</div>
       <div class="card-body small">{{ customer.notes|default:"No notes."|linebreaks }}</div>
     </div>
     <div class="card shadow-sm">
-      <div class="card-header">Documents</div>
+      <div class="card-header">{% trans "Documents" %}</div>
       <ul class="list-group list-group-flush">
         {% for doc in documents %}
         <li class="list-group-item small d-flex justify-content-between">
@@ -45,7 +46,7 @@
           {% csrf_token %}
           {{ document_form.name }}
           {{ document_form.file }}
-          <button class="btn btn-sm btn-outline-primary">Upload</button>
+          <button class="btn btn-sm btn-outline-primary">{% trans "Upload" %}</button>
         </form>
       </div>
     </div>
@@ -53,10 +54,10 @@
 
   <div class="col-lg-8">
     <div class="card shadow-sm mb-3">
-      <div class="card-header">Deals ({{ deals|length }})</div>
+      <div class="card-header">{% trans "Deals" %} ({{ deals|length }})</div>
       <div class="table-responsive">
         <table class="table table-sm mb-0">
-          <thead><tr><th>Deal</th><th>Value</th><th>Stage</th><th>Expected Close</th></tr></thead>
+          <thead><tr><th>{% trans "Deal" %}</th><th>{% trans "Value" %}</th><th>{% trans "Stage" %}</th><th>{% trans "Expected Close" %}</th></tr></thead>
           <tbody>
             {% for deal in deals %}
             <tr><td><a href="{{ deal.get_absolute_url }}">{{ deal.name }}</a></td><td>${{ deal.value|intcomma }}</td><td>{{ deal.get_stage_display }}</td><td>{{ deal.expected_close_date|default:"—" }}</td></tr>
@@ -68,7 +69,7 @@
     <div class="row g-3">
       <div class="col-md-6">
         <div class="card shadow-sm h-100">
-          <div class="card-header">Tickets</div>
+          <div class="card-header">{% trans "Tickets" %}</div>
           <ul class="list-group list-group-flush">
             {% for ticket in tickets %}<li class="list-group-item small"><a href="{{ ticket.get_absolute_url }}">{{ ticket.ticket_number }}</a> — {{ ticket.subject }} <span class="badge bg-secondary">{{ ticket.get_status_display }}</span></li>
             {% empty %}<li class="list-group-item text-muted small">No tickets.</li>{% endfor %}
@@ -77,7 +78,7 @@
       </div>
       <div class="col-md-6">
         <div class="card shadow-sm h-100">
-          <div class="card-header">Invoices</div>
+          <div class="card-header">{% trans "Invoices" %}</div>
           <ul class="list-group list-group-flush">
             {% for invoice in invoices %}<li class="list-group-item small"><a href="{{ invoice.get_absolute_url }}">{{ invoice.invoice_number }}</a> — ${{ invoice.total_amount|intcomma }} <span class="badge bg-secondary">{{ invoice.get_status_display }}</span></li>
             {% empty %}<li class="list-group-item text-muted small">No invoices.</li>{% endfor %}
@@ -86,7 +87,7 @@
       </div>
     </div>
     <div class="card shadow-sm mt-3">
-      <div class="card-header">Activity Timeline</div>
+      <div class="card-header">{% trans "Activity Timeline" %}</div>
       <div class="card-body">
         <ul class="timeline mb-0">
           {% for activity in activities %}

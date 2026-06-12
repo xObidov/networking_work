@@ -1,32 +1,33 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Support Tickets — CRM{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h3 class="mb-0">Support Tickets</h3>
-  <a href="{% url 'tickets:add' %}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>New Ticket</a>
+  <h3 class="mb-0">{% trans "Support Tickets" %}</h3>
+  <a href="{% url 'tickets:add' %}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>{% trans "New Ticket" %}</a>
 </div>
 
 <form method="get" class="row g-2 mb-3">
-  <div class="col-md-4"><input name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Search number, subject, customer..."></div>
+  <div class="col-md-4"><input name="q" value="{{ request.GET.q }}" class="form-control" placeholder="{% trans 'Search...' %}"></div>
   <div class="col-md-3">
     <select name="status" class="form-select">
-      <option value="">All statuses</option>
+      <option value="">{% trans "All statuses" %}</option>
       {% for value, label in statuses %}<option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
     </select>
   </div>
   <div class="col-md-3">
     <select name="priority" class="form-select">
-      <option value="">Any priority</option>
+      <option value="">{% trans "Any priority" %}</option>
       {% for value, label in priorities %}<option value="{{ value }}" {% if request.GET.priority == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
     </select>
   </div>
-  <div class="col-md-2"><button class="btn btn-outline-primary w-100">Filter</button></div>
+  <div class="col-md-2"><button class="btn btn-outline-primary w-100">{% trans "Filter" %}</button></div>
 </form>
 
 <div class="card shadow-sm">
   <div class="table-responsive">
     <table class="table table-hover align-middle mb-0">
-      <thead><tr><th>Ticket #</th><th>Subject</th><th>Customer</th><th>Priority</th><th>Status</th><th>Assigned</th><th></th></tr></thead>
+      <thead><tr><th>{% trans "Ticket #" %}</th><th>{% trans "Subject" %}</th><th>{% trans "Customer" %}</th><th>{% trans "Priority" %}</th><th>{% trans "Status" %}</th><th>{% trans "Assigned" %}</th><th></th></tr></thead>
       <tbody>
         {% for ticket in object_list %}
         <tr onclick="window.location='{{ ticket.get_absolute_url }}'">
@@ -41,7 +42,7 @@
             <a href="{% url 'tickets:delete' ticket.pk %}" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></a>
           </td>
         </tr>
-        {% empty %}<tr><td colspan="7" class="text-center text-muted py-4">No tickets found.</td></tr>{% endfor %}
+        {% empty %}<tr><td colspan="7" class="text-center text-muted py-4">{% trans "No tickets found." %}</td></tr>{% endfor %}
       </tbody>
     </table>
   </div>

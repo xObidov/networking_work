@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Reports — CRM{% endblock %}
 {% block content %}
-<h3 class="mb-4">Reports</h3>
+<h3 class="mb-4">{% trans "Reports" %}</h3>
 <div class="row g-3">
   {% for report in reports %}
   <div class="col-md-4">
@@ -9,7 +10,7 @@
       <div class="card-body d-flex flex-column">
         <h6 class="card-title"><i class="bi bi-bar-chart me-2"></i>{{ report.title }}</h6>
         <div class="mt-auto d-flex gap-2">
-          <a href="{% url 'reports:detail' report.key %}" class="btn btn-sm btn-primary">View</a>
+          <a href="{% url 'reports:detail' report.key %}" class="btn btn-sm btn-primary">{% trans "View" %}</a>
           <a href="{% url 'reports:export' report.key 'xlsx' %}" class="btn btn-sm btn-outline-success"><i class="bi bi-file-earmark-excel me-1"></i>Excel</a>
           <a href="{% url 'reports:export' report.key 'pdf' %}" class="btn btn-sm btn-outline-danger"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</a>
         </div>

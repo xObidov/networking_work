@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
 from core.models import TimeStampedModel
@@ -7,21 +8,21 @@ from core.models import TimeStampedModel
 
 class Lead(TimeStampedModel):
     class Status(models.TextChoices):
-        NEW = "new", "New"
-        CONTACTED = "contacted", "Contacted"
-        QUALIFIED = "qualified", "Qualified"
-        PROPOSAL_SENT = "proposal_sent", "Proposal Sent"
-        WON = "won", "Won"
-        LOST = "lost", "Lost"
+        NEW = "new", _("New")
+        CONTACTED = "contacted", _("Contacted")
+        QUALIFIED = "qualified", _("Qualified")
+        PROPOSAL_SENT = "proposal_sent", _("Proposal Sent")
+        WON = "won", _("Won")
+        LOST = "lost", _("Lost")
 
     class Source(models.TextChoices):
-        WEBSITE = "website", "Website"
-        REFERRAL = "referral", "Referral"
-        SOCIAL_MEDIA = "social_media", "Social Media"
-        COLD_CALL = "cold_call", "Cold Call"
-        EMAIL_CAMPAIGN = "email_campaign", "Email Campaign"
-        EVENT = "event", "Event"
-        OTHER = "other", "Other"
+        WEBSITE = "website", _("Website")
+        REFERRAL = "referral", _("Referral")
+        SOCIAL_MEDIA = "social_media", _("Social Media")
+        COLD_CALL = "cold_call", _("Cold Call")
+        EMAIL_CAMPAIGN = "email_campaign", _("Email Campaign")
+        EVENT = "event", _("Event")
+        OTHER = "other", _("Other")
 
     name = models.CharField(max_length=200)
     email = models.EmailField(blank=True)

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load humanize %}
 {% block title %}{{ deal.name }} — CRM{% endblock %}
 {% block content %}
@@ -7,7 +8,7 @@
     <span class="badge {% if deal.stage == 'won' %}bg-success{% elif deal.stage == 'lost' %}bg-danger{% else %}bg-primary{% endif %} fs-6 align-middle">{{ deal.get_stage_display }}</span>
   </h3>
   <div>
-    <a href="{% url 'deals:edit' deal.pk %}" class="btn btn-outline-primary"><i class="bi bi-pencil me-1"></i>Edit</a>
+    <a href="{% url 'deals:edit' deal.pk %}" class="btn btn-outline-primary"><i class="bi bi-pencil me-1"></i>{% trans "Edit" %}</a>
     <a href="{% url 'deals:delete' deal.pk %}" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
   </div>
 </div>
@@ -23,7 +24,7 @@
   </div>
   <div class="col-lg-6">
     <div class="card shadow-sm">
-      <div class="card-header">Invoices for this deal</div>
+      <div class="card-header">{% trans "Invoices for this deal" %}</div>
       <ul class="list-group list-group-flush">
         {% for invoice in deal.invoices.all %}
         <li class="list-group-item small"><a href="{{ invoice.get_absolute_url }}">{{ invoice.invoice_number }}</a> — ${{ invoice.total_amount|intcomma }} <span class="badge bg-secondary">{{ invoice.get_status_display }}</span></li>

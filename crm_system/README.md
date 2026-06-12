@@ -19,6 +19,7 @@ A production-ready Customer Relationship Management system built with **Django 5
 | **Reports** | 6 reports, each exportable to **Excel** and **PDF** |
 | **Activity Log** | Append-only audit trail with user, action, IP and timestamp |
 | **REST API** | `/api/v1/` ViewSets for every entity, JWT auth, filtering, search, pagination, throttling |
+| **i18n** | English + Uzbek (Oʻzbekcha) with a language switcher in the navbar; translations in `locale/uz/` |
 
 ## Tech stack
 

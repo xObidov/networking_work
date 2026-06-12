@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from core.models import TimeStampedModel
 
@@ -8,14 +9,14 @@ class ActivityLog(TimeStampedModel):
     """Append-only audit trail of every significant action in the system."""
 
     class Action(models.TextChoices):
-        LOGIN = "login", "Login"
-        LOGOUT = "logout", "Logout"
-        CREATE = "create", "Create"
-        UPDATE = "update", "Update"
-        DELETE = "delete", "Delete"
-        ASSIGN = "assign", "Assign"
-        CONVERT = "convert", "Convert"
-        STATUS_CHANGE = "status_change", "Status Change"
+        LOGIN = "login", _("Login")
+        LOGOUT = "logout", _("Logout")
+        CREATE = "create", _("Create")
+        UPDATE = "update", _("Update")
+        DELETE = "delete", _("Delete")
+        ASSIGN = "assign", _("Assign")
+        CONVERT = "convert", _("Convert")
+        STATUS_CHANGE = "status_change", _("Status Change")
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

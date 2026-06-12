@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from django.conf import settings
 from django.db import models, transaction
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.utils import timezone
 
@@ -10,10 +11,10 @@ from core.models import TimeStampedModel
 
 class Invoice(TimeStampedModel):
     class Status(models.TextChoices):
-        DRAFT = "draft", "Draft"
-        PENDING = "pending", "Pending"
-        PAID = "paid", "Paid"
-        OVERDUE = "overdue", "Overdue"
+        DRAFT = "draft", _("Draft")
+        PENDING = "pending", _("Pending")
+        PAID = "paid", _("Paid")
+        OVERDUE = "overdue", _("Overdue")
 
     invoice_number = models.CharField(max_length=20, unique=True, editable=False)
     customer = models.ForeignKey(

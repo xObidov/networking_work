@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}{% if object %}Edit{% else %}New{% endif %} Task — CRM{% endblock %}
 {% block content %}
-<h3 class="mb-4">{% if object %}Edit Task{% else %}New Task{% endif %}</h3>
+<h3 class="mb-4">{% if object %}{% trans "Edit Task" %}{% else %}{% trans "New Task" %}{% endif %}</h3>
 <div class="card shadow-sm"><div class="card-body">
   <form method="post">{% csrf_token %}
     <div class="row">
@@ -13,8 +14,8 @@
       </div>
       {% endfor %}
     </div>
-    <button class="btn btn-primary">Save Task</button>
-    <a href="{% url 'tasks:list' %}" class="btn btn-outline-secondary">Cancel</a>
+    <button class="btn btn-primary">{% trans "Save Task" %}</button>
+    <a href="{% url 'tasks:list' %}" class="btn btn-outline-secondary">{% trans "Cancel" %}</a>
   </form>
 </div></div>
 {% endblock %}

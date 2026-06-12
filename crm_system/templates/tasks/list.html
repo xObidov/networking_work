@@ -1,38 +1,39 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Tasks — CRM{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h3 class="mb-0">Tasks</h3>
-  <a href="{% url 'tasks:add' %}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>New Task</a>
+  <h3 class="mb-0">{% trans "Tasks" %}</h3>
+  <a href="{% url 'tasks:add' %}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>{% trans "New Task" %}</a>
 </div>
 
 <form method="get" class="row g-2 mb-3">
-  <div class="col-md-3"><input name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Search tasks..."></div>
+  <div class="col-md-3"><input name="q" value="{{ request.GET.q }}" class="form-control" placeholder="{% trans 'Search...' %}"></div>
   <div class="col-md-2">
     <select name="status" class="form-select">
-      <option value="">All statuses</option>
+      <option value="">{% trans "All statuses" %}</option>
       {% for value, label in statuses %}<option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
     </select>
   </div>
   <div class="col-md-2">
     <select name="priority" class="form-select">
-      <option value="">Any priority</option>
+      <option value="">{% trans "Any priority" %}</option>
       {% for value, label in priorities %}<option value="{{ value }}" {% if request.GET.priority == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
     </select>
   </div>
   <div class="col-md-3">
     <select name="assigned_to" class="form-select">
-      <option value="">Any employee</option>
+      <option value="">{% trans "Any employee" %}</option>
       {% for emp in employees %}<option value="{{ emp.id }}" {% if request.GET.assigned_to == emp.id|stringformat:"s" %}selected{% endif %}>{{ emp }}</option>{% endfor %}
     </select>
   </div>
-  <div class="col-md-2"><button class="btn btn-outline-primary w-100">Filter</button></div>
+  <div class="col-md-2"><button class="btn btn-outline-primary w-100">{% trans "Filter" %}</button></div>
 </form>
 
 <div class="card shadow-sm">
   <div class="table-responsive">
     <table class="table table-hover align-middle mb-0">
-      <thead><tr><th>Title</th><th>Assigned</th><th>Priority</th><th>Status</th><th>Due</th><th></th></tr></thead>
+      <thead><tr><th>{% trans "Title" %}</th><th>{% trans "Assigned" %}</th><th>{% trans "Priority" %}</th><th>{% trans "Status" %}</th><th>{% trans "Due" %}</th><th></th></tr></thead>
       <tbody>
         {% for task in object_list %}
         <tr onclick="window.location='{{ task.get_absolute_url }}'" {% if task.is_overdue %}class="table-danger"{% endif %}>
@@ -46,7 +47,7 @@
             <a href="{% url 'tasks:delete' task.pk %}" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></a>
           </td>
         </tr>
-        {% empty %}<tr><td colspan="6" class="text-center text-muted py-4">No tasks found.</td></tr>{% endfor %}
+        {% empty %}<tr><td colspan="6" class="text-center text-muted py-4">{% trans "No tasks found." %}</td></tr>{% endfor %}
       </tbody>
     </table>
   </div>

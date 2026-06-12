@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
@@ -20,16 +20,16 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li><a href="{% url 'dashboard:home' %}" class="nav-link {% if request.resolver_match.namespace == 'dashboard' %}active{% endif %}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-      <li><a href="{% url 'customers:list' %}" class="nav-link {% if request.resolver_match.namespace == 'customers' %}active{% endif %}"><i class="bi bi-people me-2"></i>Customers</a></li>
-      <li><a href="{% url 'leads:list' %}" class="nav-link {% if request.resolver_match.namespace == 'leads' %}active{% endif %}"><i class="bi bi-funnel me-2"></i>Leads</a></li>
-      <li><a href="{% url 'deals:kanban' %}" class="nav-link {% if request.resolver_match.namespace == 'deals' %}active{% endif %}"><i class="bi bi-briefcase me-2"></i>Deals</a></li>
-      <li><a href="{% url 'tasks:list' %}" class="nav-link {% if request.resolver_match.namespace == 'tasks' %}active{% endif %}"><i class="bi bi-check2-square me-2"></i>Tasks</a></li>
-      <li><a href="{% url 'tickets:list' %}" class="nav-link {% if request.resolver_match.namespace == 'tickets' %}active{% endif %}"><i class="bi bi-life-preserver me-2"></i>Tickets</a></li>
-      <li><a href="{% url 'invoices:list' %}" class="nav-link {% if request.resolver_match.namespace == 'invoices' %}active{% endif %}"><i class="bi bi-receipt me-2"></i>Invoices</a></li>
-      <li><a href="{% url 'reports:index' %}" class="nav-link {% if request.resolver_match.namespace == 'reports' %}active{% endif %}"><i class="bi bi-bar-chart me-2"></i>Reports</a></li>
+      <li><a href="{% url 'dashboard:home' %}" class="nav-link {% if request.resolver_match.namespace == 'dashboard' %}active{% endif %}"><i class="bi bi-speedometer2 me-2"></i>{% trans "Dashboard" %}</a></li>
+      <li><a href="{% url 'customers:list' %}" class="nav-link {% if request.resolver_match.namespace == 'customers' %}active{% endif %}"><i class="bi bi-people me-2"></i>{% trans "Customers" %}</a></li>
+      <li><a href="{% url 'leads:list' %}" class="nav-link {% if request.resolver_match.namespace == 'leads' %}active{% endif %}"><i class="bi bi-funnel me-2"></i>{% trans "Leads" %}</a></li>
+      <li><a href="{% url 'deals:kanban' %}" class="nav-link {% if request.resolver_match.namespace == 'deals' %}active{% endif %}"><i class="bi bi-briefcase me-2"></i>{% trans "Deals" %}</a></li>
+      <li><a href="{% url 'tasks:list' %}" class="nav-link {% if request.resolver_match.namespace == 'tasks' %}active{% endif %}"><i class="bi bi-check2-square me-2"></i>{% trans "Tasks" %}</a></li>
+      <li><a href="{% url 'tickets:list' %}" class="nav-link {% if request.resolver_match.namespace == 'tickets' %}active{% endif %}"><i class="bi bi-life-preserver me-2"></i>{% trans "Tickets" %}</a></li>
+      <li><a href="{% url 'invoices:list' %}" class="nav-link {% if request.resolver_match.namespace == 'invoices' %}active{% endif %}"><i class="bi bi-receipt me-2"></i>{% trans "Invoices" %}</a></li>
+      <li><a href="{% url 'reports:index' %}" class="nav-link {% if request.resolver_match.namespace == 'reports' %}active{% endif %}"><i class="bi bi-bar-chart me-2"></i>{% trans "Reports" %}</a></li>
       {% if user.role == 'super_admin' or user.role == 'admin' %}
-      <li><a href="{% url 'activity_logs:list' %}" class="nav-link {% if request.resolver_match.namespace == 'activity_logs' %}active{% endif %}"><i class="bi bi-clock-history me-2"></i>Activity Log</a></li>
+      <li><a href="{% url 'activity_logs:list' %}" class="nav-link {% if request.resolver_match.namespace == 'activity_logs' %}active{% endif %}"><i class="bi bi-clock-history me-2"></i>{% trans "Activity Log" %}</a></li>
       {% endif %}
     </ul>
     <hr>
@@ -44,6 +44,24 @@
         <button class="btn btn-outline-secondary btn-sm" id="themeToggle" title="Toggle dark mode">
           <i class="bi bi-moon-stars"></i>
         </button>
+        <!-- Language switcher -->
+        <div class="dropdown">
+          <button class="btn btn-outline-secondary btn-sm dropdown-toggle text-uppercase" data-bs-toggle="dropdown">
+            <i class="bi bi-translate me-1"></i>{{ LANGUAGE_CODE|slice:":2" }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            {% get_available_languages as languages %}
+            {% for code, name in languages %}
+            <li>
+              <form method="post" action="{% url 'set_language' %}">{% csrf_token %}
+                <input type="hidden" name="language" value="{{ code }}">
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button class="dropdown-item {% if LANGUAGE_CODE|slice:':2' == code %}active{% endif %}">{{ name }}</button>
+              </form>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
         <!-- Notifications -->
         <div class="dropdown">
           <button class="btn btn-outline-secondary btn-sm position-relative" data-bs-toggle="dropdown">
@@ -54,9 +72,9 @@
           </button>
           <div class="dropdown-menu dropdown-menu-end notification-menu p-0">
             <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
-              <strong>Notifications</strong>
+              <strong>{% trans "Notifications" %}</strong>
               <form method="post" action="{% url 'notifications:mark_all_read' %}">{% csrf_token %}
-                <button class="btn btn-link btn-sm p-0">Mark all read</button>
+                <button class="btn btn-link btn-sm p-0">{% trans "Mark all read" %}</button>
               </form>
             </div>
             {% for n in recent_notifications %}
@@ -65,9 +83,9 @@
               <div class="text-muted text-truncate">{{ n.message }}</div>
             </a>
             {% empty %}
-            <div class="dropdown-item small text-muted py-3 text-center">No unread notifications</div>
+            <div class="dropdown-item small text-muted py-3 text-center">{% trans "No unread notifications" %}</div>
             {% endfor %}
-            <a class="dropdown-item text-center small py-2" href="{% url 'notifications:list' %}">View all</a>
+            <a class="dropdown-item text-center small py-2" href="{% url 'notifications:list' %}">{% trans "View all" %}</a>
           </div>
         </div>
         <!-- User menu -->
@@ -77,12 +95,12 @@
             <span class="d-none d-md-inline">{{ user.get_full_name|default:user.email }}</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="{% url 'accounts:profile' %}"><i class="bi bi-person me-2"></i>Profile</a></li>
-            <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}"><i class="bi bi-key me-2"></i>Change Password</a></li>
+            <li><a class="dropdown-item" href="{% url 'accounts:profile' %}"><i class="bi bi-person me-2"></i>{% trans "Profile" %}</a></li>
+            <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}"><i class="bi bi-key me-2"></i>{% trans "Change Password" %}</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}
-                <button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
+                <button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>{% trans "Logout" %}</button>
               </form>
             </li>
           </ul>
@@ -103,6 +121,16 @@
 </div>
 {% else %}
 <main class="auth-page d-flex align-items-center justify-content-center min-vh-100">
+  <div class="position-fixed top-0 end-0 m-3 d-flex gap-1">
+    {% get_available_languages as languages %}
+    {% for code, name in languages %}
+    <form method="post" action="{% url 'set_language' %}">{% csrf_token %}
+      <input type="hidden" name="language" value="{{ code }}">
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <button class="btn btn-sm {% if LANGUAGE_CODE|slice:':2' == code %}btn-primary{% else %}btn-outline-secondary{% endif %} text-uppercase">{{ code }}</button>
+    </form>
+    {% endfor %}
+  </div>
   {% for message in messages %}
   <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index:1080">
     {{ message }}

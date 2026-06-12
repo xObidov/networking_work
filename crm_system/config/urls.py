@@ -11,6 +11,7 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("i18n/", include("django.conf.urls.i18n")),  # set_language view
     # ---- Web UI ----
     path("", include("dashboard.urls")),
     path("accounts/", include("accounts.urls")),

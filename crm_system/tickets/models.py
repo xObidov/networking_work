@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models, transaction
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.utils import timezone
 
@@ -8,16 +9,16 @@ from core.models import TimeStampedModel
 
 class Ticket(TimeStampedModel):
     class Status(models.TextChoices):
-        OPEN = "open", "Open"
-        IN_PROGRESS = "in_progress", "In Progress"
-        RESOLVED = "resolved", "Resolved"
-        CLOSED = "closed", "Closed"
+        OPEN = "open", _("Open")
+        IN_PROGRESS = "in_progress", _("In Progress")
+        RESOLVED = "resolved", _("Resolved")
+        CLOSED = "closed", _("Closed")
 
     class Priority(models.TextChoices):
-        LOW = "low", "Low"
-        MEDIUM = "medium", "Medium"
-        HIGH = "high", "High"
-        URGENT = "urgent", "Urgent"
+        LOW = "low", _("Low")
+        MEDIUM = "medium", _("Medium")
+        HIGH = "high", _("High")
+        URGENT = "urgent", _("Urgent")
 
     ticket_number = models.CharField(max_length=20, unique=True, editable=False)
     customer = models.ForeignKey(

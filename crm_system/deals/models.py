@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
 from core.models import TimeStampedModel
@@ -7,12 +8,12 @@ from core.models import TimeStampedModel
 
 class Deal(TimeStampedModel):
     class Stage(models.TextChoices):
-        PROSPECT = "prospect", "Prospect"
-        QUALIFIED = "qualified", "Qualified"
-        PROPOSAL = "proposal", "Proposal"
-        NEGOTIATION = "negotiation", "Negotiation"
-        WON = "won", "Won"
-        LOST = "lost", "Lost"
+        PROSPECT = "prospect", _("Prospect")
+        QUALIFIED = "qualified", _("Qualified")
+        PROPOSAL = "proposal", _("Proposal")
+        NEGOTIATION = "negotiation", _("Negotiation")
+        WON = "won", _("Won")
+        LOST = "lost", _("Lost")
 
     name = models.CharField(max_length=200)
     customer = models.ForeignKey(

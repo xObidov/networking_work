@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@
   </table>
 
   <table>
-    <thead><tr><th>Description</th><th class="right">Amount</th></tr></thead>
+    <thead><tr><th>{% trans "Description" %}</th><th class="right">Amount</th></tr></thead>
     <tbody>
       <tr><td>{% if invoice.deal %}{{ invoice.deal.name }}{% else %}Services{% endif %}</td><td class="right">${{ invoice.amount }}</td></tr>
       <tr><td>Tax ({{ invoice.tax_rate }}%)</td><td class="right">${{ invoice.tax_amount }}</td></tr>
