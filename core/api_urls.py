@@ -1,4 +1,5 @@
 """REST API v1 router. Every app registers its ViewSets here."""
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from accounts.api import UserViewSet
@@ -9,7 +10,7 @@ from invoices.api import InvoiceViewSet
 from leads.api import LeadViewSet
 from notifications.api import NotificationViewSet
 from tasks.api import TaskViewSet
-from tickets.api import TicketViewSet
+from tickets.api import ContactFormView, TicketViewSet
 
 router = DefaultRouter()
 router.register("users", UserViewSet, basename="user")
@@ -23,4 +24,7 @@ router.register("invoices", InvoiceViewSet, basename="invoice")
 router.register("notifications", NotificationViewSet, basename="notification")
 router.register("activity-logs", ActivityLogViewSet, basename="activitylog")
 
-urlpatterns = router.urls
+urlpatterns = router.urls + [
+    # Public contact-form intake (website -> CRM ticket)
+    path("contact/", ContactFormView.as_view(), name="api_contact"),
+]

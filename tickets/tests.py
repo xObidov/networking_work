@@ -76,3 +76,63 @@ class TicketAPITests(TestCase):
         self.assertTrue(create.json()["ticket_number"].startswith("TKT-"))
         reply = self.client.post(f"/api/v1/tickets/{pk}/reply/", {"body": "ack"})
         self.assertEqual(reply.status_code, 201)
+
+
+class ContactFormAPITests(TestCase):
+    """Public contact-form endpoint: website submissions become tickets."""
+
+    URL = "/api/v1/contact/"
+
+    def test_anonymous_submission_creates_customer_and_ticket(self):
+        response = self.client.post(self.URL, {
+            "name": "Said Kamol",
+            "email": "visitor@example.com",
+            "message": "Mahsulotlaringiz haqida ma'lumot kerak.",
+        })
+        self.assertEqual(response.status_code, 201, response.content)
+        self.assertTrue(response.json()["ticket_number"].startswith("TKT-"))
+        from customers.models import Customer
+        customer = Customer.objects.get(email="visitor@example.com")
+        self.assertEqual(customer.first_name, "Said")
+        ticket = Ticket.objects.get(customer=customer)
+        self.assertIn("Aloqa formasi", ticket.subject)
+        self.assertEqual(ticket.status, Ticket.Status.OPEN)
+
+    def test_existing_customer_is_reused(self):
+        existing = make_customer(email="repeat@example.com")
+        self.client.post(self.URL, {
+            "name": "Repeat Visitor", "email": "repeat@example.com",
+            "message": "Yana bir savol.",
+        })
+        from customers.models import Customer
+        self.assertEqual(Customer.objects.filter(email="repeat@example.com").count(), 1)
+        self.assertEqual(existing.tickets.count(), 1)
+
+    def test_admins_get_notified(self):
+        admin = make_user(email="contact-admin@test.local", role=Role.ADMIN)
+        sales = make_user(email="contact-sales@test.local", role=Role.SALES_AGENT)
+        self.client.post(self.URL, {
+            "name": "N", "email": "n@example.com", "message": "msg",
+        })
+        self.assertTrue(admin.notifications.filter(title__icontains="murojaat").exists())
+        self.assertFalse(sales.notifications.exists())
+
+    def test_invalid_email_rejected(self):
+        response = self.client.post(self.URL, {
+            "name": "X", "email": "not-an-email", "message": "msg",
+        })
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Ticket.objects.count(), 0)
+
+    def test_shared_key_enforced_when_configured(self):
+        import os
+        from unittest import mock
+        with mock.patch.dict(os.environ, {"CONTACT_API_KEY": "sekret"}):
+            bad = self.client.post(self.URL, {
+                "name": "X", "email": "x@example.com", "message": "m",
+            })
+            self.assertEqual(bad.status_code, 403)
+            good = self.client.post(self.URL, {
+                "name": "X", "email": "x@example.com", "message": "m",
+            }, headers={"X-Contact-Key": "sekret"})
+            self.assertEqual(good.status_code, 201)
