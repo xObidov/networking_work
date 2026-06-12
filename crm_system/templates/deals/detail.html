@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ deal.name }} — CRM{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h3 class="mb-0">{{ deal.name }}
+    <span class="badge {% if deal.stage == 'won' %}bg-success{% elif deal.stage == 'lost' %}bg-danger{% else %}bg-primary{% endif %} fs-6 align-middle">{{ deal.get_stage_display }}</span>
+  </h3>
+  <div>
+    <a href="{% url 'deals:edit' deal.pk %}" class="btn btn-outline-primary"><i class="bi bi-pencil me-1"></i>Edit</a>
+    <a href="{% url 'deals:delete' deal.pk %}" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
+  </div>
+</div>
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="card shadow-sm"><div class="card-body small">
+      <p><i class="bi bi-person me-2"></i>Customer: <a href="{% url 'customers:detail' deal.customer_id %}">{{ deal.customer.full_name }}</a></p>
+      <p><i class="bi bi-cash me-2"></i>Value: <strong>${{ deal.value|intcomma }}</strong></p>
+      <p><i class="bi bi-calendar-event me-2"></i>Expected close: {{ deal.expected_close_date|default:"—" }}</p>
+      <p><i class="bi bi-person-badge me-2"></i>Owner: {{ deal.owner|default:"—" }}</p>
+      <p class="mb-0"><i class="bi bi-card-text me-2"></i>{{ deal.description|default:"No description." }}</p>
+    </div></div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-header">Invoices for this deal</div>
+      <ul class="list-group list-group-flush">
+        {% for invoice in deal.invoices.all %}
+        <li class="list-group-item small"><a href="{{ invoice.get_absolute_url }}">{{ invoice.invoice_number }}</a> — ${{ invoice.total_amount|intcomma }} <span class="badge bg-secondary">{{ invoice.get_status_display }}</span></li>
+        {% empty %}<li class="list-group-item text-muted small">No invoices.</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

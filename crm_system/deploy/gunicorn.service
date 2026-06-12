@@ -1,0 +1,27 @@
+# systemd unit — install to /etc/systemd/system/crm-gunicorn.service
+[Unit]
+Description=CRM System (Gunicorn)
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=notify
+User=crm
+Group=crm
+WorkingDirectory=/srv/crm_system
+Environment="DJANGO_SETTINGS_MODULE=config.settings.production"
+ExecStart=/srv/crm_system/.venv/bin/gunicorn \
+    --workers 4 \
+    --threads 2 \
+    --bind unix:/run/crm/gunicorn.sock \
+    --timeout 60 \
+    --access-logfile /srv/crm_system/logs/gunicorn-access.log \
+    --error-logfile /srv/crm_system/logs/gunicorn-error.log \
+    config.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+RuntimeDirectory=crm
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

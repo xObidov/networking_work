@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ lead.name }} — CRM{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h3 class="mb-0">{{ lead.name }}
+    <span class="badge {% if lead.status == 'won' %}bg-success{% elif lead.status == 'lost' %}bg-danger{% else %}bg-primary{% endif %} fs-6 align-middle">{{ lead.get_status_display }}</span>
+  </h3>
+  <div>
+    {% if lead.is_converted %}
+    <a href="{% url 'customers:detail' lead.converted_customer_id %}" class="btn btn-success"><i class="bi bi-person-check me-1"></i>View Customer</a>
+    {% else %}
+    <form method="post" action="{% url 'leads:convert' lead.pk %}" class="d-inline">{% csrf_token %}
+      <button class="btn btn-success" onclick="return confirm('Convert this lead to a customer?')"><i class="bi bi-arrow-repeat me-1"></i>Convert to Customer</button>
+    </form>
+    {% endif %}
+    <a href="{% url 'leads:edit' lead.pk %}" class="btn btn-outline-primary"><i class="bi bi-pencil me-1"></i>Edit</a>
+    <a href="{% url 'leads:delete' lead.pk %}" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-header">Lead Info</div>
+      <div class="card-body small">
+        <p><i class="bi bi-envelope me-2"></i>{{ lead.email|default:"—" }}</p>
+        <p><i class="bi bi-telephone me-2"></i>{{ lead.phone|default:"—" }}</p>
+        <p><i class="bi bi-building me-2"></i>{{ lead.company|default:"—" }}</p>
+        <p><i class="bi bi-signpost me-2"></i>Source: {{ lead.get_source_display }}</p>
+        <p><i class="bi bi-person me-2"></i>Assigned: {{ lead.assigned_to|default:"Unassigned" }}</p>
+        <p class="mb-0"><i class="bi bi-card-text me-2"></i>{{ lead.notes|default:"No notes." }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-header">Notes & History</div>
+      <div class="card-body">
+        <form method="post" action="{% url 'leads:add_note' lead.pk %}" class="mb-3">{% csrf_token %}
+          {{ note_form.body }}
+          <button class="btn btn-sm btn-primary mt-2">Add Note</button>
+        </form>
+        <ul class="timeline mb-0">
+          {% for note in notes %}
+          <li>
+            <div class="small">{{ note.body|linebreaksbr }}</div>
+            <div class="text-muted small">{{ note.author|default:"—" }} · {{ note.created_at|naturaltime }}</div>
+          </li>
+          {% empty %}<li class="text-muted small">No notes yet.</li>{% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

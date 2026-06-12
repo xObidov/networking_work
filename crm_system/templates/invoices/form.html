@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{% if object %}Edit{% else %}Generate{% endif %} Invoice — CRM{% endblock %}
+{% block content %}
+<h3 class="mb-4">{% if object %}Edit Invoice {{ object.invoice_number }}{% else %}Generate Invoice{% endif %}</h3>
+<div class="card shadow-sm"><div class="card-body">
+  <form method="post">{% csrf_token %}
+    <div class="row">
+      {% for field in form %}
+      <div class="col-md-6 mb-3">
+        <label class="form-label">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+        {{ field }}
+        {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+        {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+    <button class="btn btn-primary">Save Invoice</button>
+    <a href="{% url 'invoices:list' %}" class="btn btn-outline-secondary">Cancel</a>
+  </form>
+</div></div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Deals Board — CRM{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="mb-0">Deals <span class="badge bg-success fs-6">Won: ${{ won_total|intcomma }}</span></h3>
+  <div>
+    <a href="{% url 'deals:list' %}" class="btn btn-outline-secondary"><i class="bi bi-list-ul me-1"></i>List view</a>
+    <a href="{% url 'deals:add' %}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>New Deal</a>
+  </div>
+</div>
+
+<div class="kanban-board">
+  {% for column in columns %}
+  <div class="kanban-column" data-stage="{{ column.stage }}">
+    <div class="p-2 px-3 d-flex justify-content-between align-items-center border-bottom">
+      <strong class="small">{{ column.label }}</strong>
+      <span class="badge bg-secondary">{{ column.deals|length }} · ${{ column.total|intcomma }}</span>
+    </div>
+    <div class="kanban-cards">
+      {% for deal in column.deals %}
+      <div class="card kanban-card shadow-sm mb-2" draggable="true" data-deal-id="{{ deal.pk }}">
+        <div class="card-body p-2">
+          <a href="{{ deal.get_absolute_url }}" class="fw-semibold small text-decoration-none d-block">{{ deal.name }}</a>
+          <div class="small text-muted">{{ deal.customer.full_name }}</div>
+          <div class="d-flex justify-content-between align-items-center mt-1">
+            <span class="badge bg-primary">${{ deal.value|intcomma }}</span>
+            <span class="small text-muted">{{ deal.expected_close_date|default:"" }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

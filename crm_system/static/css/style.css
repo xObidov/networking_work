@@ -1,0 +1,64 @@
+/* ===== CRM System UI ===== */
+:root {
+  --sidebar-width: 240px;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: var(--bs-body-bg);
+  border-right: 1px solid var(--bs-border-color);
+  position: sticky;
+  top: 0;
+}
+.sidebar .brand { color: var(--bs-emphasis-color); }
+.sidebar .nav-link { color: var(--bs-secondary-color); border-radius: .5rem; }
+.sidebar .nav-link:hover { background: var(--bs-tertiary-bg); }
+.sidebar .nav-link.active { background: var(--bs-primary); color: #fff; }
+
+@media (max-width: 991px) {
+  .sidebar { position: fixed; z-index: 1045; left: calc(-1 * var(--sidebar-width)); transition: left .2s; }
+  .sidebar.show { left: 0; }
+}
+
+.topbar { background: var(--bs-body-bg); }
+
+.avatar-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bs-primary); color: #fff; font-size: .7rem; font-weight: 700;
+}
+
+.notification-menu { width: 320px; max-height: 400px; overflow-y: auto; }
+
+/* KPI cards */
+.kpi-card { border: none; border-radius: 1rem; }
+.kpi-icon {
+  width: 48px; height: 48px; border-radius: .75rem;
+  display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+}
+
+/* Kanban */
+.kanban-board { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; }
+.kanban-column {
+  min-width: 270px; width: 270px; flex-shrink: 0;
+  background: var(--bs-tertiary-bg); border-radius: .75rem;
+}
+.kanban-cards { min-height: 120px; padding: .5rem; }
+.kanban-card { cursor: grab; }
+.kanban-card.dragging { opacity: .5; }
+.kanban-column.drag-over .kanban-cards { outline: 2px dashed var(--bs-primary); border-radius: .5rem; }
+
+/* Auth pages */
+.auth-page { background: var(--bs-tertiary-bg); }
+.auth-card { width: 100%; max-width: 420px; }
+
+/* Timeline */
+.timeline { list-style: none; padding-left: 0; }
+.timeline li { position: relative; padding-left: 1.5rem; padding-bottom: 1rem; border-left: 2px solid var(--bs-border-color); margin-left: .5rem; }
+.timeline li::before {
+  content: ""; position: absolute; left: -7px; top: 2px;
+  width: 12px; height: 12px; border-radius: 50%; background: var(--bs-primary);
+}
+
+.table-hover tbody tr { cursor: pointer; }

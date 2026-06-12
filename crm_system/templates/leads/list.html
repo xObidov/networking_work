@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Leads — CRM{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="mb-0">Leads</h3>
+  <a href="{% url 'leads:add' %}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Create Lead</a>
+</div>
+
+<form method="get" class="row g-2 mb-3">
+  <div class="col-md-4"><input name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Search name, email, company..."></div>
+  <div class="col-md-3">
+    <select name="status" class="form-select">
+      <option value="">All statuses</option>
+      {% for value, label in statuses %}<option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select name="assigned_to" class="form-select">
+      <option value="">Any employee</option>
+      {% for emp in employees %}<option value="{{ emp.id }}" {% if request.GET.assigned_to == emp.id|stringformat:"s" %}selected{% endif %}>{{ emp }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2"><button class="btn btn-outline-primary w-100">Filter</button></div>
+</form>
+
+<div class="card shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead><tr><th>Name</th><th>Company</th><th>Source</th><th>Status</th><th>Assigned</th><th>Created</th><th></th></tr></thead>
+      <tbody>
+        {% for lead in object_list %}
+        <tr onclick="window.location='{{ lead.get_absolute_url }}'">
+          <td>{{ lead.name }}</td>
+          <td>{{ lead.company|default:"—" }}</td>
+          <td>{{ lead.get_source_display }}</td>
+          <td><span class="badge {% if lead.status == 'won' %}bg-success{% elif lead.status == 'lost' %}bg-danger{% elif lead.status == 'new' %}bg-info{% else %}bg-primary{% endif %}">{{ lead.get_status_display }}</span></td>
+          <td>{{ lead.assigned_to|default:"—" }}</td>
+          <td class="small text-muted">{{ lead.created_at|date:"Y-m-d" }}</td>
+          <td onclick="event.stopPropagation()">
+            <a href="{% url 'leads:edit' lead.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></a>
+            <a href="{% url 'leads:delete' lead.pk %}" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" class="text-center text-muted py-4">No leads found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% include "includes/pagination.html" %}
+{% endblock %}
