@@ -89,6 +89,30 @@
     .feature-text h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; }
     .feature-text p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
 
+    /* CONTACT */
+    .contact-section { background: var(--black); color: var(--white); display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: start; }
+    .contact-info .section-title { color: var(--white); }
+    .contact-info .section-desc { color: rgba(255,255,255,0.5); }
+    .contact-details { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .contact-item-icon { width: 40px; height: 40px; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-item-text label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.2rem; }
+    .contact-item-text p { font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+    .contact-form { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 2.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
+    .form-group input, .form-group textarea { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; padding: 0.9rem 1.1rem; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; transition: border-color 0.2s; outline: none; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { height: 120px; resize: vertical; }
+    .btn-submit { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 1.1rem; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: all 0.3s; }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-success { display: none; text-align: center; padding: 3rem 2rem; color: var(--gold); background: rgba(255,255,255,0.04); border: 1px solid rgba(201,169,110,0.3); border-radius: 4px; }
+    .form-success .check { font-size: 3rem; display: block; margin-bottom: 1rem; }
+    .form-success h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; margin-bottom: 0.5rem; }
+    .form-success p { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+
     /* FOOTER */
     footer { background: #050505; color: rgba(255,255,255,0.4); padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--white); letter-spacing: 0.05em; }
@@ -103,6 +127,8 @@
       .stats { grid-template-columns: repeat(2,1fr); }
       .products-grid { grid-template-columns: repeat(2,1fr); }
       .about-section { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-section { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .nav-links { gap: 1rem; }
@@ -120,6 +146,7 @@
     <li><a href="/" class="active">Bosh sahifa</a></li>
     <li><a href="#products">Mahsulotlar</a></li>
     <li><a href="#about">Biz haqimizda</a></li>
+    <li><a href="#contact">Bog'lanish</a></li>
     <li><a href="/dashboard/" class="nav-cta">CRM tizimiga kirish</a></li>
   </ul>
 </nav>
@@ -220,11 +247,79 @@
   </div>
 </section>
 
+<!-- CONTACT / MUROJAAT -->
+<section class="contact-section" id="contact">
+  <div class="contact-info">
+    <span class="section-tag">✦ Bog'lanish</span>
+    <h2 class="section-title">Murojaat<br>Qoldiring</h2>
+    <p class="section-desc">Savol yoki ulgurji buyurtmangiz bormi? Quyidagi formani to'ldiring — murojaatingiz qabul qilinadi va tez orada bog'lanamiz.</p>
+    <div class="contact-details">
+      <div class="contact-item"><div class="contact-item-icon">📍</div><div class="contact-item-text"><label>Manzil</label><p>Toshkent, O'zbekiston</p></div></div>
+      <div class="contact-item"><div class="contact-item-icon">📞</div><div class="contact-item-text"><label>Telefon</label><p>+998 90 000 00 00</p></div></div>
+      <div class="contact-item"><div class="contact-item-icon">✉️</div><div class="contact-item-text"><label>Email</label><p>info@silkstone.uz</p></div></div>
+    </div>
+  </div>
+  <div>
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="form-group"><label>Ismingiz</label><input type="text" name="name" required></div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" required></div>
+      </div>
+      <div class="form-group"><label>Telefon (ixtiyoriy)</label><input type="text" name="phone"></div>
+      <div class="form-group"><label>Xabaringiz</label><textarea name="message" required></textarea></div>
+      <button type="submit" class="btn-submit">Murojaatni yuborish</button>
+    </form>
+    <div class="form-success" id="formSuccess">
+      <span class="check">✓</span>
+      <h3>Rahmat! Murojaatingiz qabul qilindi.</h3>
+      <p>Tez orada siz bilan bog'lanamiz.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-logo">Silk <span>&amp;</span> Stone</div>
   <p>© 2025 Silk &amp; Stone Ulgurji. Barcha huquqlar himoyalangan.</p>
   <p>Toshkent, O'zbekiston</p>
 </footer>
+
+<script>
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Yuborilmoqda...';
+    const payload = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      message: form.message.value.trim(),
+    };
+    try {
+      const res = await fetch('/api/v1/contact/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        let msg = 'Qayta urinib ko\'ring.';
+        try { const d = await res.json(); msg = d.detail || JSON.stringify(d); } catch (_) {}
+        alert('Xatolik: ' + msg);
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    } catch (err) {
+      alert('Tarmoq xatosi. Internetni tekshirib, qayta urinib ko\'ring.');
+      btn.disabled = false;
+      btn.textContent = original;
+    }
+  });
+</script>
 
 </body>
 </html>
