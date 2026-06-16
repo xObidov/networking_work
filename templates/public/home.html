@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silk &amp; Stone — Ulgurji Kiyim-kechak</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+    :root {
+      --black: #0a0a0a; --white: #fafaf8; --cream: #f2ede6;
+      --gold: #c9a96e; --gold-light: #e8d5b0; --gray: #6b6b6b;
+      --gray-light: #d4d0c8; --accent: #2c2c2c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 5%; background: rgba(250,250,248,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-light); transition: all 0.3s; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-cta { background: var(--black); color: var(--white) !important; padding: 0.6rem 1.3rem; border-radius: 2px; }
+    .nav-cta::after { display: none; }
+    .nav-cta:hover { background: var(--gold); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 5%; padding-top: 80px; background: var(--cream); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,169,110,0.15) 0%, transparent 70%); border-radius: 50%; }
+    .hero-content { padding-right: 4rem; animation: fadeUp 0.8s ease both; }
+    .hero-tag { display: inline-block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-light); padding: 0.4rem 1rem; border-radius: 20px; margin-bottom: 2rem; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 300; line-height: 1.1; color: var(--black); margin-bottom: 1.5rem; }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-desc { font-size: 1rem; color: var(--gray); line-height: 1.8; max-width: 440px; margin-bottom: 2.5rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--black); color: var(--white); padding: 1rem 2.2rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; border-radius: 2px; }
+    .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 0.6rem; background: transparent; color: var(--black); padding: 1rem 2.2rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--black); cursor: pointer; transition: all 0.3s; border-radius: 2px; margin-left: 1rem; }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+    .hero-visual { position: relative; height: 80vh; display: flex; align-items: center; justify-content: center; animation: fadeUp 0.8s 0.2s ease both; }
+    .hero-image-box { width: 100%; height: 90%; background: linear-gradient(135deg, #e8ddd0 0%, #d4c9ba 100%); border-radius: 4px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .hero-image-box::after { content: 'SILK & STONE'; font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; letter-spacing: 0.3em; color: rgba(255,255,255,0.3); position: absolute; }
+    .hero-badge { position: absolute; bottom: 2rem; left: -1.5rem; background: var(--black); color: var(--white); padding: 1.2rem 1.8rem; border-radius: 3px; }
+    .hero-badge .num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--gold); display: block; }
+    .hero-badge .label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-light); }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--black); padding: 3rem 5%; }
+    .stat-item { padding: 1.5rem 2rem; border-right: 1px solid rgba(255,255,255,0.1); text-align: center; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--gold); display: block; line-height: 1; }
+    .stat-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 0.5rem; }
+
+    /* SECTION COMMON */
+    section { padding: 6rem 5%; }
+    .section-tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; color: var(--black); line-height: 1.2; margin-bottom: 1.5rem; }
+    .section-desc { font-size: 0.95rem; color: var(--gray); line-height: 1.8; max-width: 560px; }
+
+    /* PRODUCTS PREVIEW */
+    .products-preview { background: var(--white); }
+    .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .product-card { background: var(--cream); border-radius: 3px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .product-img { height: 280px; background: linear-gradient(135deg, #ddd5c8 0%, #c8bfb0 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .product-img-icon { font-family: 'Cormorant Garamond', serif; font-size: 4rem; color: rgba(255,255,255,0.5); }
+    .product-cat { position: absolute; top: 1rem; left: 1rem; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--white); color: var(--gray); padding: 0.3rem 0.8rem; border-radius: 20px; }
+    .product-info { padding: 1.5rem; }
+    .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--black); margin-bottom: 0.4rem; }
+    .product-desc { font-size: 0.82rem; color: var(--gray); margin-bottom: 1rem; }
+    .product-price { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--gold); }
+
+    /* ABOUT */
+    .about-section { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about-visual { position: relative; }
+    .about-img-main { width: 100%; height: 500px; background: linear-gradient(135deg, #c8bfb0, #b5aa9a); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+    .about-img-main span { font-family: 'Cormorant Garamond', serif; font-size: 6rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+    .about-img-secondary { position: absolute; bottom: -2rem; right: -2rem; width: 200px; height: 200px; background: var(--gold); border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--white); text-align: center; padding: 1.5rem; }
+    .about-img-secondary .year { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; line-height: 1; }
+    .about-img-secondary .since { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; margin-top: 0.3rem; }
+    .about-features { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .feature-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem; background: var(--white); border-radius: 3px; border-left: 3px solid var(--gold); }
+    .feature-icon { font-size: 1.5rem; }
+    .feature-text h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .feature-text p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+
+    /* FOOTER */
+    footer { background: #050505; color: rgba(255,255,255,0.4); padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--white); letter-spacing: 0.05em; }
+    .footer-logo span { color: var(--gold); }
+    footer p { font-size: 0.78rem; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 100px; }
+      .hero-visual { height: 50vh; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+      .products-grid { grid-template-columns: repeat(2,1fr); }
+      .about-section { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { gap: 1rem; }
+      .nav-links li:not(:last-child) { display: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Silk <span>&amp;</span> Stone</a>
+  <ul class="nav-links">
+    <li><a href="/" class="active">Bosh sahifa</a></li>
+    <li><a href="#products">Mahsulotlar</a></li>
+    <li><a href="#about">Biz haqimizda</a></li>
+    <li><a href="/dashboard/" class="nav-cta">CRM tizimiga kirish</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">✦ O'zbekiston #1 Ulgurji Brendi</span>
+    <h1 class="hero-title">
+      Zamonaviy<br>
+      <em>Moda</em><br>
+      Ulgurjida
+    </h1>
+    <p class="hero-desc">
+      Silk &amp; Stone — yuqori sifatli kiyim-kechakni to'g'ridan-to'g'ri ishlab chiqaruvchidan.
+      ERP, CRM va WMS tizimlari orqali boshqariladigan zamonaviy ulgurji platforma.
+    </p>
+    <div>
+      <a href="#products" class="btn-primary">Katalogni ko'rish →</a>
+      <a href="/dashboard/" class="btn-outline">CRM tizimiga kirish</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-image-box"></div>
+    <div class="hero-badge">
+      <span class="num">500+</span>
+      <span class="label">Mahsulot modeli</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item"><span class="stat-num">12+</span><span class="stat-label">Yillik tajriba</span></div>
+  <div class="stat-item"><span class="stat-num">200+</span><span class="stat-label">Hamkor do'konlar</span></div>
+  <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Mahsulot modeli</span></div>
+  <div class="stat-item"><span class="stat-num">15</span><span class="stat-label">Viloyat bo'ylab yetkazib berish</span></div>
+</div>
+
+<!-- PRODUCTS PREVIEW -->
+<section class="products-preview" id="products">
+  <div class="products-header">
+    <div>
+      <span class="section-tag">✦ Assortiment</span>
+      <h2 class="section-title">Mashhur<br>Mahsulotlar</h2>
+    </div>
+    <a href="#about" class="btn-outline">Barchasini ko'rish</a>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img"><span class="product-img-icon">👔</span><span class="product-cat">Erkaklar</span></div>
+      <div class="product-info">
+        <h3 class="product-name">Erkaklar Klassik Kostyum</h3>
+        <p class="product-desc">Yuqori sifatli jun material, zamonaviy kesim</p>
+        <span class="product-price">450 000 so'm</span>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #d8c8bc, #c4b5a8)"><span class="product-img-icon">👗</span><span class="product-cat">Ayollar</span></div>
+      <div class="product-info">
+        <h3 class="product-name">Ayollar Yozgi Ko'ylak</h3>
+        <p class="product-desc">Yengil ip material, rangli naqshlar</p>
+        <span class="product-price">180 000 so'm</span>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #c5d5d8, #b0c5c8)"><span class="product-img-icon">🧥</span><span class="product-cat">Unisex</span></div>
+      <div class="product-info">
+        <h3 class="product-name">Unisex Denim Jaket</h3>
+        <p class="product-desc">Klassik ko'k denim, barcha yoshlar uchun</p>
+        <span class="product-price">275 000 so'm</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT PREVIEW -->
+<section class="about-section" id="about">
+  <div class="about-visual">
+    <div class="about-img-main"><span>S&amp;S</span></div>
+    <div class="about-img-secondary"><span class="year">2012</span><span class="since">dan beri</span></div>
+  </div>
+  <div class="about-content">
+    <span class="section-tag">✦ Biz haqimizda</span>
+    <h2 class="section-title">Ishonchli<br>Hamkor</h2>
+    <p class="section-desc">
+      2012 yildan buyon O'zbekiston va MDH mamlakatlarida yuqori sifatli
+      kiyim-kechak yetkazib berib kelmoqdamiz. Zamonaviy bulut texnologiyalari
+      orqali buyurtmalaringizni real vaqtda kuzatishingiz mumkin.
+    </p>
+    <div class="about-features">
+      <div class="feature-item"><span class="feature-icon">🚚</span><div class="feature-text"><h4>Tez yetkazib berish</h4><p>Buyurtma berilgan kundan 24-48 soat ichida yetkazib beramiz</p></div></div>
+      <div class="feature-item"><span class="feature-icon">🔒</span><div class="feature-text"><h4>Xavfsiz to'lov</h4><p>Barcha to'lovlar shifrlangan kanal orqali amalga oshiriladi</p></div></div>
+      <div class="feature-item"><span class="feature-icon">📦</span><div class="feature-text"><h4>Ommaviy buyurtma</h4><p>50 dona va undan ortiq buyurtmalarga maxsus chegirma</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Silk <span>&amp;</span> Stone</div>
+  <p>© 2025 Silk &amp; Stone Ulgurji. Barcha huquqlar himoyalangan.</p>
+  <p>Toshkent, O'zbekiston</p>
+</footer>
+
+</body>
+</html>
