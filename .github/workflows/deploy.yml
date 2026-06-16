@@ -18,11 +18,14 @@ jobs:
 
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           port: 22
+          envs: ADMIN_PASSWORD
           script: |
             set -e
 
@@ -42,10 +45,17 @@ jobs:
             pip install --upgrade pip
             pip install -r requirements.txt
 
-            # 3) Django demo sozlamasi (SQLite — Postgres shart emas)
+            # 3) Django sozlamasi (haqiqiy Postgres crm_db)
             export DJANGO_SETTINGS_MODULE=config.settings.demo
             python manage.py migrate --noinput
             python manage.py collectstatic --noinput
+
+            # 3b) (vaqtincha) Admin (super_admin) yaratish yoki parolini yangilash.
+            #     Parol GitHub Secret ADMIN_PASSWORD dan keladi (repoda turmaydi).
+            #     Kirish: email = admin@silkstone.uz , parol = ADMIN_PASSWORD qiymati
+            if [ -n "${ADMIN_PASSWORD}" ]; then
+              python manage.py shell -c "import os; from accounts.models import User; u,c=User.objects.get_or_create(email='admin@silkstone.uz'); u.is_staff=True; u.is_superuser=True; u.role='super_admin'; u.is_email_verified=True; u.set_password(os.environ['ADMIN_PASSWORD']); u.save(); print('ADMIN TAYYOR: admin@silkstone.uz  yangi=', c)"
+            fi
 
             # 4) DIAGNOSTIKA — cloudflared va portlarni logga chiqarish (vaqtincha, tekshirish uchun)
             echo "===== CLOUDFLARED JARAYONI ====="
