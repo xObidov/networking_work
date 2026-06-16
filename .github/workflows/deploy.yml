@@ -1,0 +1,66 @@
+# Har safar `main` branchga push qilinganda saytni avtomatik yangilaydi (CI/CD).
+# GitHub repo -> Settings -> Secrets and variables -> Actions da quyidagilarni qo'shing:
+#   EC2_HOST  = serveringizning public IP manzili (masalan 13.51.10.20)
+#   EC2_KEY   = saidkamol.pem faylining TO'LIQ matni (-----BEGIN ... -----END qatorlari bilan)
+name: Deploy Django CRM to EC2
+ 
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # Actions sahifasidan qo'lda ham ishga tushirish mumkin
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+ 
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          port: 22
+          script: |
+            set -e
+ 
+            # 1) Eng so'nggi kodni olish (birinchi marta clone, keyin yangilash)
+            if [ ! -d "networking_work" ]; then
+              git clone https://github.com/xObidov/networking_work.git
+            fi
+            cd networking_work
+            git fetch origin main
+            git reset --hard origin/main
+ 
+            # 2) Virtual muhit + kutubxonalar
+            if [ ! -d "venv" ]; then
+              python3 -m venv venv
+            fi
+            source venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+ 
+            # 3) Django demo sozlamasi (SQLite — Postgres shart emas)
+            export DJANGO_SETTINGS_MODULE=config.settings.demo
+            python manage.py migrate --noinput
+            python manage.py collectstatic --noinput
+ 
+            # 4) Cloudflare tunnel qaysi portga ulangan bo'lsa, o'shani aniqlash.
+            #    (cloudflared ishlab turibdi — uni TO'XTATMAYMIZ, shuning uchun link o'zgarmaydi.)
+            APP_PORT=$(pgrep -af cloudflared | grep -oE '(localhost|127\.0\.0\.1):[0-9]+' | grep -oE '[0-9]+' | head -1)
+            if [ -z "$APP_PORT" ]; then APP_PORT=5000; fi   # topilmasa, 5000 ga tushadi
+            echo "Ilova porti: $APP_PORT (cloudflared shu portga ulangan)"
+ 
+            # 5) Eski ilovani to'xtatib, gunicorn'ni AYNAN o'sha portda (faqat localhost) ishga tushirish.
+            #    Tashqaridan faqat HTTPS tunnel orqali kiriladi; port to'g'ridan-to'g'ri ochiq emas.
+            fuser -k "${APP_PORT}/tcp" || true
+            sleep 2
+            nohup venv/bin/gunicorn config.wsgi:application \
+                  --bind 127.0.0.1:${APP_PORT} \
+                  --workers 3 \
+                  --env DJANGO_SETTINGS_MODULE=config.settings.demo \
+                  > app.log 2>&1 &
+            sleep 3
+            echo "Deploy tugadi — sayt o'sha linkda yangilandi (cloudflared o'zgarmadi)."
