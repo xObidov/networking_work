@@ -1,9 +1,9 @@
 """
-Tez DEMO sozlamalari — CI/CD ko'rsatish uchun.
+DEMO / namoyish sozlamalari — CI/CD ko'rsatish uchun.
 
-PostgreSQL, .env yoki maxfiy kalit TALAB QILMAYDI: ma'lumotlar SQLite faylda.
-Faqat namoyish uchun; haqiqiy production ma'lumotlari uchun ishlatmang
-(buning uchun config.settings.production bor).
+Haqiqiy PostgreSQL bazasiga (.env dagi crm_db) ulanadi, lekin Cloudflare tunnel
+orqali HTTPS bilan ochilishi uchun moslangan (ALLOWED_HOSTS, CSRF, HTTPS).
+DEBUG yoqilgan — namoyish uchun qulay; keyinroq production.py ga o'tish mumkin.
 """
 from .base import *  # noqa: F401,F403
 
@@ -11,13 +11,9 @@ from .base import *  # noqa: F401,F403
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
-# PostgreSQL o'rniga oddiy SQLite fayl — hech narsa o'rnatish shart emas
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "demo.sqlite3",  # noqa: F405
-    }
-}
+# Ma'lumotlar bazasi: base.py allaqachon .env dagi PostgreSQL (crm_db) ga ulanadi.
+# Shuning uchun bu yerda DB ni override QILMAYMIZ — haqiqiy foydalanuvchilar va
+# ma'lumotlar (to'g'ri rollari bilan) serverdagi Postgres'dan keladi.
 
 # Static fayllarni oddiy uzatish (manifest/hash yo'q) — collectstatic bo'lmasa ham sahifa buzilmaydi
 STORAGES["staticfiles"] = {  # noqa: F405
