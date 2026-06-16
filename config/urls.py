@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import TemplateView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -12,8 +13,10 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),  # set_language view
-    # ---- Web UI ----
-    path("", include("dashboard.urls")),
+    # ---- Public landing page (ommaviy bosh sahifa) ----
+    path("", TemplateView.as_view(template_name="public/home.html"), name="home"),
+    # ---- Web UI (CRM) ----
+    path("dashboard/", include("dashboard.urls")),
     path("accounts/", include("accounts.urls")),
     path("customers/", include("customers.urls")),
     path("leads/", include("leads.urls")),
