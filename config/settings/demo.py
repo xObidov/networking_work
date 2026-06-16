@@ -7,6 +7,13 @@ DEBUG yoqilgan — namoyish uchun qulay; keyinroq production.py ga o'tish mumkin
 """
 from .base import *  # noqa: F401,F403
 
+import os
+
+# Ommaviy murojaat (contact) formasi maxfiy kalitsiz ishlashi uchun:
+# agar serverda CONTACT_API_KEY o'rnatilgan bo'lsa, jarayon muhitidan olib tashlaymiz,
+# aks holda forma "403 Forbidden" qaytaradi.
+os.environ.pop("CONTACT_API_KEY", None)
+
 # Demo uchun: xatolar ko'rinsin, hamma host ruxsat etilsin (IP orqali kiriladi)
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
